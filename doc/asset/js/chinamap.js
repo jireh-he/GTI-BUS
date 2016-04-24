@@ -476,7 +476,7 @@ var citydata=[
    					            emphasis:{label:{show:true}}
    					        },
    					        mapLocation: {
-   					            x: '35%'
+   					            x: '41%'
    					        },
    					        roam: true,
    					        data:citydata
