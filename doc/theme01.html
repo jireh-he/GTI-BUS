@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ECharts">
+    <meta name="author" content="jireh-he 18772119@qq.com">
+    <title>China Provincial Bus Transit Data 2001-2014</title>
+
+    <link rel="shortcut icon" href="./asset/ico/favicon.png">
+
+    <link href="./asset/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./asset/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./asset/css/carousel.css" rel="stylesheet">
+    <link href="./asset/css/echartsHome.css" rel="stylesheet">
+    <style type="text/css">
+        .affix {
+            width:160px;
+        }
+        .affix li {
+            list-style-type : none;
+            height : 35px;
+            line-height:35px;
+            vertical-align:middle;
+        }
+        ul.slides li{
+            width : 33.3%;
+            overflow:hidden;
+            float : left;
+            border:0px solid #ccc;
+            margin: 15px 0;
+            list-style-type : none;
+            position:relative;
+        }
+        ul.slides li a {
+            padding:5px;
+            display:block;
+        }
+        ul.slides li a strong{
+            font-size:15px;
+            color : #1e90ff;
+        }
+        ul.slides li a:hover {
+            background-color:#eee;
+            text-decoration:none;
+        }
+        ul.slides li img {
+            width:60%;
+        }
+        ul.slides li span {
+            color:#666;
+            width:36%;
+            vertical-align:top;
+            display:inline-block;
+            *zoom:1;
+        }
+        .col-md-10 h3 {
+            clear:both;
+            margin:10px 0;
+            padding-bottom:10px;
+            border-bottom:1px solid #ccc;
+        }
+        .col-md-10 h3 a {
+            display:inline-block;
+            *zoom:1;
+            padding-top:63px;
+        }
+        #chartsTypeNav ul li {
+            transition: background-color 0.3s;
+            -moz-transition: background-color 0.3s;
+            -webkit-transition: background-color 0.3s;
+            -o-transition: background-color 0.3s;
+            padding-left:10px;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <!-- HEADER -->
+     <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="head"></div>
+
+	<header>
+        <div class="container">
+            <h1>中国各省城市公共电汽车营运数据及相关指标 2001-2014（Urban bus transit data accross all provinces from 2001-2014）</h1>
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <strong>引言：</strong>21世纪以来，各省在城市公共电汽车建设上的投入不断增长，哪个省最高效推进城市公共交通的建设，可以在此数据中得到答案
+        </div>
+    </section>
+    
+    <div class="container">
+        <!-- CONTAINER -->
+        <div class="row">
+            <div id="overview" class="span12">
+                <h3>2014年各省平均城市公共电汽车线路里程：级数相差明显</h3>
+                <div id="g0" style="height:550px"></div>
+            </div>
+            
+            <div id="graphic" class="span12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs nav-justified">
+                  <li class="active">
+                      <a id = "tab1" href="#main1" data-toggle="tab">当经济成果摊到每个人身上…</a></li>
+                  <li><a id = "tab2" href="#main2" data-toggle="tab">经济发展有多不平衡？</a></li>
+                  <li><a id = "tab3" href="#main3" data-toggle="tab">房地产支撑GDP？</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="main1">
+                        <p>人均指标选择：
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="NOBTV" checked>营运公交车辆数
+                            </label>
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="LOBTR">营运线路里程
+                            </label>
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="TNAPT">年客运量
+                            </label>
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios4" value="BBTVTTP">万人公共汽电车辆保有量
+                            </label>
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios5" value="ATInv">公共交通固定资产投资
+                            </label>
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios6" value="UAPD">城区人口密度
+                            </label>
+                        </p>
+                        <div id="g1" style="height:400px"></div>
+                       
+                    </div>
+                    <div class="tab-pane" id="main2">
+                        <div class="ctrl-wrap">
+                            <div class="ctrl-content">
+                                <button type="button" class="btn btn-success" id="2001">2001</button>
+                                <button type="button" class="btn btn-info" id="2006">2006</button>
+                                <button type="button" class="btn btn-info" id="2011">2011</button>
+                                <button type="button" class="btn btn-info" id="2016">2016</button>
+                               </div>
+                        </div>
+                        <div id="g20" class="g2wrap"></div>
+                        <div id="g21" class="g2wrap"></div>
+                        <div id="g22" class="g2wrap"></div>
+                        <div id="g23" class="g2wrap"></div>
+                        <div id="g24" class="g2wrap"></div>
+                        <div id="g25" class="g2wrap"></div>
+            
+           <p style="clear:both"></p>
+                    </div>
+                    <div class="tab-pane" id="main3">
+                        <div id="g3" style="height:400px"></div>
+                        <p><i>*任何两项或多项数据间均可进行比较。</i></p>
+                     
+                    </div>
+                </div>
+            </div><!--/span-->
+        </div><!--/row-->
+    </div>
+    <!-- FOOTER -->
+    <footer>
+    
+    </footer>
+  <footer id="footer"></footer>
+  
+   <script src="./asset/js/jquery.min.js"></script>
+    
+   <!--  <script src="../../../asset/js/bootstrap-transition.js"></script>
+    <script src=" http://hm.baidu.com/h.js?b78830c9a5dad062d08b90b2bc0cf5da" type="text/javascript"></script>
+    <script src="../../../asset/js/bootstrap-alert.js"></script>
+    <script src="../../../asset/js/bootstrap-modal.js"></script>
+    <script src="../../../asset/js/bootstrap-dropdown.js"></script>
+    <script src="../../../asset/js/bootstrap-scrollspy.js"></script>
+    <script src="../../../asset/js/bootstrap-tab.js"></script>
+    <script src="../../../asset/js/bootstrap-tooltip.js"></script>
+    <script src="../../../asset/js/bootstrap-popover.js"></script>
+    <script src="../../../asset/js/bootstrap-button.js"></script>
+    <script src="../../../asset/js/bootstrap-collapse.js"></script>
+    <script src="../../../asset/js/bootstrap-carousel.js"></script>
+    <script src="../../../asset/js/bootstrap-typeahead.js"></script> -->
+    
+    
+    <!-- core -->
+     <script src="./asset/js/bootstrap.min.js"></script>
+    <script src="./asset/js/echarts.js"></script>
+    
+    
+    <script src="./asset/js/theme01/js/data-formatter.js"></script>
+
+    <script src="./asset/js/theme01/js/option0.js"></script>
+    <script src="./asset/js/theme01/js/option1.js"></script>
+    <script src="./asset/js/theme01/js/option2.js"></script>
+    <script src="./asset/js/theme01/js/option3.js"></script>
+    <script src="./asset/js/theme01/js/djws.js"></script>
+    
+     
+  
+    
+</body>
+</html>
