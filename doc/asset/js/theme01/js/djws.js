@@ -56,7 +56,7 @@ function launchExample() {
         function (ec) {
             EC_READY = true;
             myChart0 = ec.init(document.getElementById('g0')).setOption(option0()); 
-            //showTabContent(1);
+            showTabContent(1);
         }
     );
 }
