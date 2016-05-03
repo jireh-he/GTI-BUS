@@ -89,15 +89,14 @@ $('#head')[0].innerHTML =
         + '</a>'
         + '<div class="navbar-collapse collapse" id="nav-wrap">'
           + '<ul class="nav navbar-nav navbar-right" id="nav" style="max-width:100%;">'
-            + (enVersion
-            ? ('<li class="' + (activeClass.index || '') + '"><a href="' + (loc.index || '.') + '/index-en.html">Home</a></li>'
-                + '<li class="' + (activeClass.example || '') + '"><a href="' + (loc.example || '.') + '/example-en.html">Example</a></li>'
-               
-            )
-            : ('<li class="' + (activeClass.index || '') + '"><a href="' + (loc.index || '.') + '/index.html">首页</a></li>'
-                + '<li class="' + (activeClass.example || '') + '"><a href="' + (loc.example || '.') + '/example.html">实例</a></li>'
-            )
-            )
+           +'<li class="dropdown ' + (activeClass.doc || activeClass.option || '') + '">'
+            + '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' + (enVersion ? 'example' : '实例') + '<b class="caret"></b></a>'
+            + '<ul class="dropdown-menu">'
+              + '<li class=""><a href="' + (loc.example || '.') + '/example' + (enVersion ? '-en.html">example1' : '.html">实例1') + '</a></li>'
+              + '<li class=""><a href="' + (loc.example || '.') + '/theme2' + (enVersion ? '-en.html">example2' : '.html">实例2') + '</a></li>'
+            + '</ul>'
+          + '</li>'
+            
             + '<li class="dropdown ' + (activeClass.doc || activeClass.option || '') + '">'
               + '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' + (enVersion ? 'API & Doc' : '文档') + '<b class="caret"></b></a>'
               + '<ul class="dropdown-menu">'
