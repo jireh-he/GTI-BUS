@@ -39,6 +39,8 @@ function option0 () {
         },
         grid:{
             x: 50,
+            x2: 200,
+            y2: 10,
             borderWidth:0
         },
         xAxis : [
@@ -46,7 +48,7 @@ function option0 () {
                 type : 'value',
                 position: 'top',
                 name: '（台）',
-                splitLine: {show:true},
+                splitLine: {show:false},
                 boundaryGap : [0, 0.01]
             }
         ],

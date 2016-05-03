@@ -2,9 +2,10 @@
  * 
  */
 function option3 (name) {
+
     var option = {
         title : {
-            text: 'NOBTV',
+            text: name,
             subtext: '数据来中国城市建设统计年鉴',
             x:'right',
             textStyle:{}
@@ -14,7 +15,8 @@ function option3 (name) {
         },
         dataRange: {
             min: 0,
-            max : dataMap['dataA' + name][2016 + 'max'],
+         max : dataMap['data' + name][2016 + 'max'],
+            //max:65000,//2015-6-2改动。不然上面的语句报错。
             text:['高','低'],           // 文本，默认为数值文本
             calculable : true,
             x: 'left'
@@ -33,7 +35,7 @@ function option3 (name) {
             }
         ]
     };
-    
+
     option.title.text =  eNameMap[name];
     var color = eColorMap[name];
     option.title.textStyle.color = color;
@@ -42,12 +44,12 @@ function option3 (name) {
         require('zrender/tool/color').lift(color, -0.9)
     ];
     // console.log(option.dataRange.color,name)
-    
+
     var timelineOption = {
         timeline : {
             data : (function(){
                 var a = [];
-                for (var i = 2001; i <= 2016; i+5) {
+                for (var i = 2001; i <= 2016; i=i+5) {
                     a.push(i + '-01-01');
                 }
                 return a;
@@ -61,13 +63,13 @@ function option3 (name) {
         },
         options : []
     };
-    
+  
     var curYear = 2001;
     option.series[0].name = eNameMap[name] + '(' + curYear + ')';
-    option.series[0].data =  dataMap['dataA' + name][curYear]
-    
+    option.series[0].data =  dataMap['data' + name][curYear]
+
     timelineOption.options.push(option);
-    for (curYear = 2006; curYear <= 2016; curYear+5) {
+    for (curYear = 2006; curYear <= 2016; curYear=curYear+5 ) {
         var newSeries = {
                 type: 'map',
                 mapType: 'china',
@@ -76,10 +78,11 @@ function option3 (name) {
                 }
             };
         newSeries.name =  eNameMap[name] + '(' + curYear + ')';
-        newSeries.data =  dataMap['dataA' + name][curYear]
+        newSeries.data =  dataMap['data' + name][curYear]
         timelineOption.options.push({
             series : [newSeries]
-        })
+        });
+       
     }
     return timelineOption;
 }

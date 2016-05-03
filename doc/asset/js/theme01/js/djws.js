@@ -3,10 +3,10 @@
  */
 //经济指标命名映射
 var eNameMap = {
-    'NOBTV' : '营运公交车辆数',
+    'NOBTV': '营运公交车辆数',
     'LOBTR' : '营运线路里程',
     'TNAPT' : '年客运量',
-    'BBTVTTP' : '万人公共汽电车辆保有量',
+    'ABTVTTP' : '万人公共汽电车辆保有量',
     'ATInv' : '公共交通固定资产投资',
     'UAPD' : '城区人口密度'
 };
@@ -15,68 +15,21 @@ var eColorMap = {
 		'NOBTV': '#1e90ff',
 		'LOBTR' : '#ff7f50',
 		'TNAPT' : '#da70d6',
-		 'BBTVTTP': '#32cd32',
+		 'ABTVTTP': '#32cd32',
 		 'ATInv': '#6495ed',
 		 'UAPD': '#ff69b4'
 };
 //---------
 
-var developMode = false;
-if (developMode) {
-    window.esl = null;
-    window.define = null;
-    window.require = null;
-    (function () {
-        var script = document.createElement('script');
-        script.async = true;
 
-        var pathname = location.pathname;
-
-        var pathSegs = pathname.slice(pathname.indexOf('doc')).split('/');
-        var pathLevelArr = new Array(pathSegs.length - 1);
-        script.src = pathLevelArr.join('../') + 'asset/js/esl/esl.js';
-        if (script.readyState) {
-            script.onreadystatechange = fireLoad;
-        }
-        else {
-            script.onload = fireLoad;
-        }
-        (document.getElementsByTagName('head')[0] || document.body).appendChild(script);
-        
-        function fireLoad() {
-            script.onload = script.onreadystatechange = null;
-            setTimeout(loadedListener,100);
-        }
-        function loadedListener() {
-            // for develop
-            require.config({
-                packages: [
-                    {
-                        name: 'echarts',
-                        location: '../../../../src',
-                        main: 'echarts'
-                    },
-                    {
-                        name: 'zrender',
-                        //location: 'http://ecomfe.github.io/zrender/src',
-                        location: '../../../../../zrender/src',
-                        main: 'zrender'
-                    }
-                ]
-            });
-            launchExample();
-        }
-    })();
-}
-else {
-    require.config({
-        paths: {
-            //echarts: '../../www/js'
-        	echarts:'./asset/js'
-        }
-    });
-    launchExample();
-}
+require.config({
+    paths: {
+        //echarts: '../../www/js'
+    	echarts:'./asset/js',
+    	zrender:'./asset/js/zrender',
+    }
+});
+launchExample();
 
 
 var EC_READY = false;
@@ -98,16 +51,16 @@ function launchExample() {
             'echarts/chart/scatter',
             'echarts/chart/pie',
             'echarts/chart/radar',
-
             'echarts/chart/map'
         ],
         function (ec) {
             EC_READY = true;
             myChart0 = ec.init(document.getElementById('g0')).setOption(option0()); 
-            showTabContent(1);
+            //showTabContent(1);
         }
     );
 }
+
 
 var curTabIdx = 1;
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -118,6 +71,7 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     }
     hideTabContent(curTabIdx);
     curTabIdx = e.target.id.replace('tab','');
+ 
     showTabContent(curTabIdx);
 });
 
@@ -138,6 +92,7 @@ $('input:radio[name="optionsRadios"]').on('change', function (e) {
 
 var functionMap = {};
 function showTabContent(idx) {
+	
     functionMap['chart' + idx](idx);
 }
 function hideTabContent(idx) {
@@ -150,12 +105,12 @@ var curSelected = {
 	'NOBTV'  : true,
 	'LOBTR' : false,
 	'TNAPT': true,
-	'BBTVTTP' : false,
+	'ABTVTTP' : false,
 	'ATInv' : false,
 	'UAPD' : false
 };
 functionMap.chart3 = function (idx) {
-    functionMap.chart3dispose(idx);
+    functionMap.chart3dispose();
     myChart3 = require('echarts').init(document.getElementById('g' + idx));
     myChart3.setOption(option1(curSelected));
     // 图例状态保持
@@ -178,9 +133,11 @@ var myChart23;
 var myChart24;
 var myChart25;
 functionMap.chart2 = function (idx) {
-    functionMap.chart2dispose(idx);
+
+    functionMap.chart2dispose();
     var ec = require('echarts');
     myChart20 = ec.init(document.getElementById('g20'));
+    
     myChart21 = ec.init(document.getElementById('g21'));
     myChart22 = ec.init(document.getElementById('g22'));
     myChart23 = ec.init(document.getElementById('g23'));
@@ -190,7 +147,7 @@ functionMap.chart2 = function (idx) {
     myChart20.setOption(option2('NOBTV'));
     myChart21.setOption(option2('LOBTR'));
     myChart22.setOption(option2('TNAPT'));
-    myChart23.setOption(option2('BBTVTTP'));
+    myChart23.setOption(option2('ABTVTTP'));
     myChart24.setOption(option2('ATInv'));
     myChart25.setOption(option2('UAPD'));
 }
@@ -215,6 +172,7 @@ functionMap.chart2dispose = function () {
 var myChart1;
 var curRange = false;
 functionMap.chart1 = function (idx) {
+
     functionMap.chart1dispose(idx);
     myChart1 = require('echarts').init(document.getElementById('g' + idx));
     myChart1.setOption(option3(curEIndex));

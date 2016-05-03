@@ -2,6 +2,7 @@
  * 
  */
 function option1 (curSelected) {
+
     var option = {
         color: ['#87cefa','#ff7f50','#da70d6','#32cd32','#6495ed',
                 '#ff69b4','#ba55d3','#cd5c5c','#ffa500','#40e0d0',
@@ -14,7 +15,7 @@ function option1 (curSelected) {
             trigger: 'axis'
         },
         legend: {
-            data : ['NOBTV','LOBTR','TNAPT','BBTVTTP','ATInv','UAPD'],
+            data : ['NOBTV','LOBTR','TNAPT','ABTVTTP','ATInv','UAPD'],
             selected : curSelected
         },
         toolbox: {
@@ -51,7 +52,7 @@ function option1 (curSelected) {
             {
                 type : 'value',
                 name : 'NOBTV（vehicle）/LOBTR(km)',
-                max: 53500,
+                max: 120000,
                 splitArea : {show : true}
             },
             {
@@ -114,7 +115,7 @@ function option1 (curSelected) {
         timeline : {
             data : (function(){
                 var a = [];
-                for (var i = 2001; i <= 2016; i+5) {
+                for (var i = 2001; i <= 2016; i+=5) {
                     a.push(i + '-01-01');
                 }
                 return a;
@@ -136,7 +137,7 @@ function option1 (curSelected) {
     }
     timelineOption.options.push(option);
     //这个地方年度数据有修改
-    for (curYear = 2006; curYear <= 2016; curYear+5) {
+    for (curYear = 2006; curYear <= 2016; curYear+=5) {
         var newSeries = [
                 {
                     name:'NOBTV',
@@ -145,7 +146,7 @@ function option1 (curSelected) {
                 {
                     name:'LOBTR',
                     _name: 'LOBTR',
-                    yAxisIndex: 1
+                    yAxisIndex: 0
                 },
                 {
                     name:'TNAPT',
@@ -174,7 +175,7 @@ function option1 (curSelected) {
         }
         timelineOption.options.push({
             title : {
-                text : curYear + '年全国宏观经济指标'
+                text : curYear + '年城市公共汽电车营运指标'
             },
             series : newSeries
         })

@@ -2,6 +2,7 @@
  * 
  */
 function option2 (name) {
+
     var option = {
         title : {
             x: 'center',

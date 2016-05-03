@@ -17,6 +17,8 @@ function dataFormatter(obj) {
             }
         }
         obj[year+'max'] = Math.floor(max) ;
+        //obj[year+'max'] = Math.floor(max/100) * 100;
     }
     return obj;
 }
+
