@@ -31,6 +31,7 @@ switch (curPage) {
         break;
     case 'feature' :
     case 'example' :
+    case 'theme2':
     case 'doc' :
     case 'about' :
     case 'changelog' :
