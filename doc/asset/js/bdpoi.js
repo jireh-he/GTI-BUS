@@ -45,6 +45,20 @@ $(".legend-item").on('click',function(){
 		if(checked=='block'){
 			cityPoi(cityname, $(this));
 		}
+		if(checked=='none'){
+			if(myChart){
+				var option=myChart.getOption();
+				var searchStr=$(this).find('.item-title').text();
+				var series=option.series;
+				var newseries=[];
+		  		for(var k=0;k<series.length;k++){
+        			if(series[k].name!=searchStr)
+        				newseries.push(series[k]);
+        		}
+		  		option.series=newseries;
+		  		BMapExt.setOption(option, true);
+			}
+		}
 });
 
 })();
@@ -53,7 +67,9 @@ var cityPoi=function(cityname,legendItem){
 				
 		        poiSearch(map, searchStr, 
 		        		function(g){
-		        	
+		        	var checked=legendItem.find('.item-checkbox').css('display');
+		        	if(checked=='none')
+		        		return;
 		        	if(myChart){
 		        		var option=myChart.getOption();
 		        		var series=option.series;
@@ -80,6 +96,7 @@ var poiSearch=function(map,searchstr,optionCallback){
 	var s={};
 	var j=1;
 	var options = {
+			pageCapacity:50,
 			onSearchComplete: function(results){
 				// 判断状态是否正确
 				if (local.getStatus() == BMAP_STATUS_SUCCESS){
@@ -98,6 +115,7 @@ var poiSearch=function(map,searchstr,optionCallback){
 			}
 		};
 		var local = new BMap.LocalSearch(map, options);
+		
 		local.search(searchstr);
 };
 
