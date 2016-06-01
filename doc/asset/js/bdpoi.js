@@ -158,7 +158,7 @@ var makeOption=function(title,geolist,legendItem){
 		    		symbol:'emptyCircle',
 		            symbolSize : 3,
 	                effect : {
-	                    show: false,
+	                    show: true,
 	                    shadowBlur : 0
 	                },
 	                itemStyle:{
