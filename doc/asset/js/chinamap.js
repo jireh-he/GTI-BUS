@@ -445,12 +445,14 @@ var citydata=[
    	});
    	require(
    			['echarts',
+   			 'echarts/chart/line',
    			 'echarts/chart/map'],
    			 function(ec){
    					var allMap=ec.init(document.getElementById('allmap'));
    					allMap.setOption(option, true);
    					allMap.on('mapSelected', function (param){
    					    var selected = param.selected;
+   			
    					    var selectedProvince;
    					    var name;
    					    for (var i = 0, l = option.series[0].data.length; i < l; i++) {
@@ -459,6 +461,7 @@ var citydata=[
    					        if (selected[name]) {
    					            selectedProvince = name;
    					        }
+   					        
    					    }
    					    if (typeof selectedProvince == 'undefined') {
    					        option.series.splice(1);
@@ -495,7 +498,94 @@ var citydata=[
    					        splitNumber:0
    					    };
    					    allMap.setOption(option, true);
+   					    
    					});
+   					allMap.on('click',function(param){
+   						cityname=param.name;
+   						if(param.seriesName.indexOf('随机数据')<0)
+   							return;
+   						$.ajax({
+   							'url':'./asset/data/alldata.json',
+   							'dataType':'json',
+   							'success':function(alldata){
+   								optiondata=formatLinesdata(alldata, cityname);
+   								$("#lineshow").remove();
+   								$("<div id='lineshow' style='height:400px'></div>").insertAfter("#allmap");
+   								var lineshow=ec.init(document.getElementById('lineshow'));
+   								var lineoption={
+   									tooltip:{
+   										trigger:'axis',
+   									},
+   									legend:{
+   										data:optiondata.legend,
+   									},
+   									toolbox: {
+   								        show : true,
+   								        feature : {
+   								            mark : {show: true},
+   								            dataView : {show: true, readOnly: false},
+   								            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+   								            restore : {show: true},
+   								            saveAsImage : {show: true}
+   								        }
+   									},
+   								   calculable : true,
+   							    xAxis : [
+   							        {
+   							            type : 'category',
+   							            boundaryGap : false,
+   							            data :optiondata.xdata
+   							        }
+   							    ],
+   							    yAxis : [
+   							        {
+   							            type : 'value'
+   							        }
+   							    ],
+   							    series : optiondata.series,
+   									
+   								};
+   								lineshow.setOption(lineoption,true);
+   								
+   								
+   							},
+   						})
+   						
+   					});
+   					
    			}
    	);
 
+   	
+var formatLinesdata=function(alldata,cityname){
+	if(!alldata)
+		return;
+	var options={};
+	options.legend=[];
+	options.series=[];
+	options.xdata=[2001,2006,2011,2016]
+	for(var item in alldata){
+		options.legend.push(item);
+		var seriesdata=[];
+		for(var year in options.xdata)
+		{
+			var itemdata=alldata[item][options.xdata[year]];
+			var len=itemdata.length;
+			for(var i=0;i<len;i++){
+				 if(cityname.indexOf(itemdata[i].name)>-1){
+					 seriesdata.push(itemdata[i].value)
+					 break;
+				 }
+			 }
+		}
+		options.series.push({
+			name:item,
+			type:'line',
+			stack:'总量',
+			data:seriesdata,
+		});
+		
+	}
+	
+	return options;
+}
