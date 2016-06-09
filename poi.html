@@ -12,6 +12,7 @@
     
     <link href="./doc/asset/css/font-awesome.min.css" rel="stylesheet">
     <link href="./doc/asset/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./doc/asset/css/bootstrap-slider.min.css" rel="stylesheet">
     <link href="./doc/asset/css/carousel.css" rel="stylesheet">
     <link href="./doc/asset/css/echartsHome.css" rel="stylesheet">
     <link href="./doc/asset/css/poi.css" rel="stylesheet">
@@ -40,20 +41,39 @@
       <div class="panel panel-default list-group col-lg-3 col-sm-3" id="rightbar">            
      <div class="panel-heading">
      <span class="pull-right">
-<a id="infoBtn" href="#" data-toggle="modal" data-target="#infoModal">
-<span class="glyphicon glyphicon-info-sign"></span> info
+<a id="goAllmap" href="#" onclick="goAllmap();">
+<span class="glyphicon glyphicon-home"></span> 返回全国地图
 </a> 
 </span>
-<span id="total_cnt">0</span> total count
-<span id="total_asterisks" style="display: none;">*</span>
+总计：<span id="total_cnt">0</span> 
 
-  
+
      </div>
   <div class="panel-body">
+<div id="radiuscontrols">
+<p></p>
+<div>热点半径:<span id='radius'>1</span> km</div>
+<p></p>
+
+<div style="padding: 0px 10px;">
+<input id="rad" data-slider-id='radSlider' type="text" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="1"/>
+</div>
+<div id="radLabel" style="width:240px;padding:5px 0px;">
+<span>1</span>
+<span class="pull-right">100</span>
+</div>
+</div>  
 <div id="legend-list" class="checkbox">
 </div>
   </div>         
+     <div class="panel-footer">
+     <span class="pull-right">
+<a id="downData" href="javascript:void()" onclick="downLoadData(this);" download="download.csv" >
+<span class="glyphicon glyphicon-download-alt"></span> 下载数据
+</a> 
+</span>
 
+     </div>
        
 </div><!--end of rightbar--> 
 
@@ -69,29 +89,16 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./doc/asset/js/jquery.min.js"></script>
-    
+    <script src="./doc/asset/js/bootstrap-slider.min.js"></script>
      <script src="./doc/asset/js/echarts.js"></script>
     <script src="./doc/asset/js/esl/esl.js"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BFcd9e84753ab8dcef34748bc43f952d"></script>
     <script src="./doc/asset/js/bootstrap.min.js"></script>
+     <script type="text/javascript" src="./doc/asset/js/poimapdata.js"></script>
     <script type="text/javascript" src="./doc/asset/js/poihome.js"></script>
     <script type="text/javascript" src="./doc/asset/js/bdpoi.js"></script>
 
   
-  <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
- <div class="modal-dialog"  role="document">
-   <div class="modal-content">
-     <div class="modal-header">
-       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-       <h4 class="modal-title"><span class="glyphicon glyphicon-info-sign"></span> 
-       弹出框标题
-       </h4>
-     </div>
-     <div class="modal-body">
-弹出框内容
-</div>
-   </div>
- </div>
-</div>  
+
   </body>
 </html>

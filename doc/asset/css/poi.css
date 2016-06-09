@@ -35,5 +35,7 @@ div.legend-item {
     color: #fff;
     display:none;
 }
-
+#radiuscontrols {
+	border-bottom:1px solid;	
+}
 

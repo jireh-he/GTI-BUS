@@ -78,7 +78,7 @@ function makeLegend(legendlist){
 			+'<span class="glyphicon glyphicon-ok">'
 			+'</span></div></div><div class="legend-item-text">'
 			+'<strong><span class="pull-right stats_count" id="stats_count_'+i+'">'
-			+'</span> </strong><span class="item-title">'
+			+'0</span> </strong><span class="item-title">'
 			+legendlist[i]+'</span></div></div>';
 			
 	}
