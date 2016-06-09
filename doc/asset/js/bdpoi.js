@@ -191,7 +191,7 @@ var cityPoi=function(cityname,legendItem,radius){
 		        	{
 		        		return;
 		        	}
-		        	if(myChart!=undefined){
+		        	if(myChart!=undefined&&myChart.getSeries()!=undefined){
 		        		var option=myChart.getOption();
 		        		var series=option.series;
 		        		var exist=false;
